@@ -1,0 +1,174 @@
+/* Golden Thread - The Time Lens */
+
+.golden-thread-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-golden-thread);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.golden-thread-line {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(184, 134, 11, 0.3) 5%,
+    var(--color-gold-dark) 15%,
+    var(--color-gold-primary) 50%,
+    var(--color-gold-dark) 85%,
+    rgba(184, 134, 11, 0.3) 95%,
+    transparent 100%
+  );
+  position: relative;
+  transform-origin: center;
+}
+
+.golden-thread-line.highlighted {
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(244, 208, 63, 0.5) 5%,
+    var(--color-gold-light) 15%,
+    var(--color-gold-primary) 50%,
+    var(--color-gold-light) 85%,
+    rgba(244, 208, 63, 0.5) 95%,
+    transparent 100%
+  );
+}
+
+/* Arrow indicators */
+.thread-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.thread-arrow.left {
+  left: 30px;
+  border-width: 12px 18px 12px 0;
+  border-color: transparent var(--color-gold-primary) transparent transparent;
+  filter: drop-shadow(0 0 8px var(--color-gold-glow));
+}
+
+.thread-arrow.right {
+  right: 30px;
+  border-width: 12px 0 12px 18px;
+  border-color: transparent transparent transparent var(--color-gold-primary);
+  filter: drop-shadow(0 0 8px var(--color-gold-glow));
+}
+
+/* Year Badge */
+.year-badge {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.year-badge-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 32px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--color-gold-primary);
+  border-radius: 50px;
+  box-shadow:
+    0 0 30px var(--color-gold-glow),
+    inset 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+.year-ad {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 600;
+  color: var(--color-gold-primary);
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.year-separator {
+  font-size: 24px;
+  color: var(--color-gold-dark);
+  opacity: 0.5;
+}
+
+.year-be {
+  font-family: var(--font-sans);
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+/* Glow effect */
+.thread-glow {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 60px;
+  transform: translateY(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 175, 55, 0.15) 0%,
+    transparent 70%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Animation for the thread */
+@keyframes thread-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--color-gold-glow);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--color-gold-glow), 0 0 60px rgba(212, 175, 55, 0.2);
+  }
+}
+
+.golden-thread-line {
+  animation: thread-pulse 3s ease-in-out infinite;
+}
+
+/* Responsive adjustments for kiosk */
+@media (min-height: 1000px) {
+  .year-badge {
+    top: -90px;
+  }
+
+  .year-badge-inner {
+    padding: 16px 48px;
+    gap: 24px;
+  }
+
+  .year-ad {
+    font-size: 72px;
+  }
+
+  .year-be {
+    font-size: 36px;
+  }
+
+  .thread-arrow.left {
+    left: 50px;
+    border-width: 16px 24px 16px 0;
+  }
+
+  .thread-arrow.right {
+    right: 50px;
+    border-width: 16px 0 16px 24px;
+  }
+}

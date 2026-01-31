@@ -1,0 +1,222 @@
+/* Country Selector Modal Styles */
+
+.country-selector-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.country-selector-modal {
+  background: var(--color-bg-card);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--color-gold-dark);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Header */
+.selector-header {
+  padding: var(--space-lg);
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.selector-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--color-gold-primary);
+  margin-bottom: 4px;
+}
+
+.selector-subtitle {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+}
+
+.selector-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.selector-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+}
+
+/* Search */
+.selector-search {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.selector-search input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 16px;
+  font-family: var(--font-sans);
+  background: var(--color-bg-secondary);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.selector-search input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.selector-search input:focus {
+  border-color: var(--color-gold-dark);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+/* Country Grid */
+.selector-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm) var(--space-lg);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-sm);
+}
+
+.country-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-md);
+  background: var(--color-bg-secondary);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.country-option:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--country-color);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.country-option:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.option-flag {
+  font-size: 48px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.option-name-en {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.option-name-th {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  text-align: center;
+}
+
+/* Empty state */
+.selector-empty {
+  grid-column: 1 / -1;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.selector-empty p {
+  color: var(--color-text-tertiary);
+  margin-bottom: 8px;
+}
+
+.selector-empty p:first-child {
+  font-size: 16px;
+}
+
+.selector-empty p:last-child {
+  font-size: 14px;
+}
+
+/* Info */
+.selector-info {
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.selector-info p {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+/* Responsive for kiosk */
+@media (min-height: 1000px) {
+  .country-selector-modal {
+    max-width: 900px;
+    max-height: 80vh;
+  }
+
+  .selector-title {
+    font-size: 42px;
+  }
+
+  .selector-subtitle {
+    font-size: 16px;
+  }
+
+  .selector-search input {
+    font-size: 18px;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .selector-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .country-option {
+    padding: var(--space-lg);
+  }
+
+  .option-flag {
+    font-size: 64px;
+  }
+
+  .option-name-en {
+    font-size: 16px;
+  }
+
+  .option-name-th {
+    font-size: 14px;
+  }
+}

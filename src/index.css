@@ -1,0 +1,362 @@
+/* TimeFlow: The Chrono-Monolith - Museum-Grade Design System */
+
+:root {
+  /* Color Palette - Dark Mode Default */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-card: #111111;
+  --color-bg-card-hover: #1a1a1a;
+
+  /* Golden Thread Colors */
+  --color-gold-primary: #d4af37;
+  --color-gold-light: #f4d03f;
+  --color-gold-dark: #b8860b;
+  --color-gold-glow: rgba(212, 175, 55, 0.4);
+
+  /* Text Colors */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-text-tertiary: rgba(255, 255, 255, 0.4);
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', 'Sarabun', system-ui, -apple-system, sans-serif;
+
+  /* Spacing - Museum Scale (20-30% larger) */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 300ms ease-out;
+  --transition-slow: 500ms ease-out;
+  --transition-physics: 800ms cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-gold: 0 0 30px var(--color-gold-glow);
+
+  /* Z-Index */
+  --z-timeline: 1;
+  --z-columns: 10;
+  --z-golden-thread: 50;
+  --z-header: 100;
+  --z-modal: 200;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base */
+html, body {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* Typography Classes */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Year Display - Museum Scale */
+.year-display {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.year-display-large {
+  font-size: clamp(48px, 8vw, 96px);
+  color: var(--color-gold-primary);
+}
+
+.year-display-small {
+  font-size: clamp(24px, 4vw, 48px);
+  color: var(--color-text-secondary);
+}
+
+/* Golden Thread */
+.golden-thread {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold-dark) 10%,
+    var(--color-gold-primary) 50%,
+    var(--color-gold-dark) 90%,
+    transparent
+  );
+  box-shadow: var(--shadow-gold);
+  z-index: var(--z-golden-thread);
+  pointer-events: none;
+}
+
+.golden-thread::before,
+.golden-thread::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.golden-thread::before {
+  left: 20px;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent var(--color-gold-primary) transparent transparent;
+}
+
+.golden-thread::after {
+  right: 20px;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent var(--color-gold-primary);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-primary);
+}
+
+/* Animations */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: var(--shadow-gold);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 50px var(--color-gold-glow);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Utility Classes */
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out forwards;
+}
+
+/* Touch Feedback */
+.touch-feedback {
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.touch-feedback:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* Museum-grade button */
+.btn-museum {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-gold-primary);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-gold-primary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-museum:hover {
+  background: var(--color-gold-primary);
+  color: var(--color-bg-primary);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-museum:active {
+  transform: scale(0.98);
+}
+
+/* Card Styles */
+.event-card {
+  background: var(--color-bg-card);
+  border-radius: 12px;
+  padding: var(--space-md);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.event-card:hover {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-gold-dark);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.event-card.highlighted {
+  border-color: var(--color-gold-primary);
+  box-shadow: var(--shadow-gold);
+  transform: scale(1.02);
+}
+
+/* Country Column Header */
+.country-header {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(to bottom, var(--color-bg-primary) 0%, var(--color-bg-primary) 80%, transparent 100%);
+  padding: var(--space-md) var(--space-sm);
+  z-index: var(--z-columns);
+  text-align: center;
+}
+
+.country-flag {
+  font-size: 48px;
+  margin-bottom: var(--space-xs);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.country-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.modal-content {
+  background: var(--color-bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--color-gold-dark);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Attract Mode Overlay */
+.attract-overlay {
+  position: fixed;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: var(--z-header);
+  pointer-events: none;
+}
+
+.attract-text {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 36px);
+  color: var(--color-gold-primary);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* Hide when not idle */
+.attract-overlay.hidden {
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+}

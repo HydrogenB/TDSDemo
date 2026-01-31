@@ -1,0 +1,189 @@
+/* Event Card Styles */
+
+.event-card-wrapper {
+  margin-bottom: var(--space-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.event-card-inner {
+  background: var(--color-bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.event-card-wrapper:hover .event-card-inner {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-gold-dark);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.event-card-wrapper.highlighted .event-card-inner {
+  border-color: var(--color-gold-primary);
+  box-shadow:
+    0 0 30px var(--color-gold-glow),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.event-card-wrapper.near-focus .event-card-inner {
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* Year indicator */
+.event-year {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 8px 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.event-year-ad {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-gold-primary);
+}
+
+.event-year-be {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+}
+
+/* Event image */
+.event-image-container {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+.event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.event-card-wrapper:hover .event-image {
+  transform: scale(1.05);
+}
+
+.event-card-wrapper.highlighted .event-image {
+  transform: scale(1.1);
+}
+
+.event-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+/* Event content */
+.event-content {
+  padding: var(--space-md);
+}
+
+.event-title {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.event-card-wrapper.highlighted .event-title {
+  color: var(--color-gold-light);
+  font-size: 20px;
+}
+
+.event-description {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+/* Importance indicator */
+.event-importance {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+
+.importance-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-gold-primary);
+  opacity: 0.8;
+}
+
+.event-card-wrapper.highlighted .importance-dot {
+  animation: pulse-gold 1.5s ease-in-out infinite;
+  animation-delay: calc(var(--importance) * 0.1s);
+}
+
+/* Tap hint */
+.tap-hint {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 12px;
+  color: var(--color-gold-primary);
+  opacity: 0.7;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+/* Responsive for kiosk (larger screens) */
+@media (min-height: 1000px) {
+  .event-image-container {
+    height: 200px;
+  }
+
+  .event-title {
+    font-size: 22px;
+  }
+
+  .event-card-wrapper.highlighted .event-title {
+    font-size: 26px;
+  }
+
+  .event-description {
+    font-size: 16px;
+  }
+
+  .event-year-ad {
+    font-size: 22px;
+  }
+
+  .event-year-be {
+    font-size: 13px;
+  }
+
+  .importance-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
